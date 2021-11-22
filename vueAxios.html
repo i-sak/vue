@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Vue with Axios Sample</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="getData">프레임워크 목록 가져오기</button>
+    </div>
+    <!--
+
+        vue 통신방식 참고하기
+        
+        https://racoonlotty.tistory.com/entry/vuejs-vue-HTTP-%ED%86%B5%EC%8B%A0-Axios
+
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                getData: function() {
+                    axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+                        .then(function(response) {
+                            console.log(response);
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
