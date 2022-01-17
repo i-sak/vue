@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+        // computed
+        // HTML을 랜더링할 때 필요한 값을 생성하는 함수의 일종이다.
+
+        // methods 속성에서 함수를 정의하는 것 대신 사용한다.
+        window.onload = function() {
+            var va1 = new Vue({
+                el : '#test1',
+                data : {
+                    a1 : 100,
+                    a2 : 200
+                },
+                methods : {
+                    test_method : function() {
+                        console.log("test method")
+                        return this.a1 + this.a2
+                    },
+                    setValue : function() {
+                        this.a1 = 1000
+                        this.a2 = 2000
+                    },
+                    getRandomMethod : function() {
+                        return Math.random()
+                    }
+                },
+                computed : {
+                    test_computed : function () {
+                        console.log("test computed")
+                        return this.a1 + this.a2
+                    },
+                    getRandomComputed : function() {
+                        // 매번 새로운 호출을 사용하지 않음...
+                        return Math.random()
+                    }
+                }
+                // methods와 computed의 모양을 보면
+                /*
+                methods : 반환하는 값이 계속 같아도 함수가 계속 호출된다.
+                computed : 반환하는 값이 변하지 않았다면 이전에 변환한 값이
+                    기억해 두었다가 그 값을 그대로 사용한다. (메모리 캐싱 기능)
+
+                    console로 테스트 내용 확인
+
+
+                */
+            }) 
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <h3>a1 : {{a1}}</h3>
+        <h3>a2 : {{a2}}</h3>
+        <h3>a1 + a2 : {{a1 + a2}}</h3>
+        <h3>test_method : {{test_method()}}</h3>
+        <h3>test_method : {{test_method()}}</h3>
+        <h3>test_method : {{test_method()}}</h3>
+        <h3>test computed : {{test_computed}}</h3>
+        <h3>test computed : {{test_computed}}</h3>
+        <h3>test computed : {{test_computed}}</h3>
+
+        <button type="button" v-on:click="setValue">값 변경</button>
+
+        <h3>get random method : {{getRandomMethod()}}</h3>
+        <h3>get random method : {{getRandomMethod()}}</h3>
+        <h3>get random method : {{getRandomMethod()}}</h3>
+
+
+        <!-- 다 같은 값이 출력됨... 
+            관리되고 있는 Vue 객체의 내부 값이 
+            변경되는 경우에만 새로 호출이 되고
+            그렇지 않으면 외부 요소들을 사용할 때 변한다
+            하더라도 메모리 캐싱을 이용해 같은 값만 출력한다.
+
+            Methods는 값을 메모리에 캐싱하지 않고
+            compute는 값을 메모리에 캐싱한다.
+        -->
+        <h3>get random computed : {{getRandomComputed}}</h3>
+        <h3>get random computed : {{getRandomComputed}}</h3>
+        <h3>get random computed : {{getRandomComputed}}</h3>
+        
+    </div>
+</body>
+</html>
