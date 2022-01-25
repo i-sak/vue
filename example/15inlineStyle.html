@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // inline Style 바인딩
+        // HTML의 style 속성을 통해 설정하는 inline style
+        // 속성의 값을 v-bind로 설정할 수 있다.
+        window.onload = function() {
+            var vml = new Vue({
+                el : "#test1",
+                data : {
+                    bgcolorValue : 'red',
+                    colorValue : 'yellow',
+                    styleValue : {
+                        backgroundColor : 'red',
+                        color : 'yellow'
+                    }
+                },
+                methods : {
+                    setInlineStyle : function () {
+                        this.bgcolorValue = 'yellow'
+                        this.colorValue = 'red'
+                    },
+                    setStyleValue : function () {
+                        this.styleValue = {
+                            backgroundColor : 'yellow',
+                            color : 'red'
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <h3 style="background-color: red; color: yellow;">str</h3>
+
+        <!-- 변수명으로 '-(하이픈)'을 사용할 수 없으니, 대문자로..  -->
+        <h3 v-bind:style="{backgroundColor:bgcolorValue, color:colorValue}">str</h3>
+
+        <button type="button" v-on:click="setInlineStyle">inline css 변경</button><br>
+        
+        <h3 v-bind:style="styleValue">str</h3>
+        <button type="button" v-on:click="setStyleValue"> 객체 변경</button>
+
+        vue를 이용한다는 것은 동적으로 이용하겠다.
+    </div>
+
+    <!--
+        HTML STYLE 속성을 통해 설정하는 INLINE STYLE 속성의 값을 V-BIND로 설정할 수 있다.
+    -->
+</body>
+</html>
