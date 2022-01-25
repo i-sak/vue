@@ -28,16 +28,29 @@
                     data2 : 'bbb',
                     result1 : ''
                 },
-                watch : {
+                watch : { 
+                    // watch 를 이용하는 경우
+                    // 관리하고 있는 데이터들을 같이 관리할 때
+                    // 똑같은 코드를 2번 써주어야 한다.
+                    // 이러한 경우에 computed를 쓰면 손쉽게 처리할 수 있다.
                     data1 : function() {
-                        this.result1 = 'data1 : ' + this.data1 + 'data2 : ' + this.data2
+                        this.result1 = 'data1 : ' + this.data1 + ', data2 : ' + this.data2
                     },
                     data2 : function() {
-                        
+                        this.result1 = 'data1 : ' + this.data1 + ', data2 : ' + this.data2
+                    }
+                },
+                computed : {
+                    // 관리되고 있는 모든 변수에 대해서 다시 호출을 한다.
+                    // watch에서 2번 써준 것과 달리 한번만 작성하면 된다.
+                    result2 : function() {
+                        return 'data1 : ' + this.data1 + ', data2 : ' + this.data2
                     }
                 }
             })
         }
+
+        // watch 대신 computed 를 사용하면 반복된 코드를 하나로 통합할 수 있다.
     </script>
 
 </head>
@@ -47,7 +60,10 @@
         <h3>data2 : {{data2}}</h3>
         data1 : <input type='text' v-model='data1'> <br>
         data2 : <input type='text' v-model='data2'> <br>
-        <h3>result1 : {{result1}}</h3>
+        <h3>result1</h3>
+        <div>{{result1}}</div>
+        <h3>result2</h3>
+        <div>{{result2}}</div>
     </div>
 </body>
 </html>
