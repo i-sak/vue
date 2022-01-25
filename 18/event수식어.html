@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <style>
+        .box {
+            width: 200px;
+            height : 200px;
+            border : 1px solid black;
+        }
+    </style>
+
+    <script>
+    // Vue.js에서 제공하는 이벤트 관련 수식어를 통해 이벤트 실행을 제어할 수 있다.
+    // https://kr.vuejs.org/v2/guide/events.html#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%88%98%EC%8B%9D%EC%96%B4
+
+    // 이벤트 수식어를 통해 이벤트를 다양하게 제어할 수 있다.
+    window.onload = function () {
+        var vml = new Vue({
+            el : '#test1',
+            methods : {
+                method1:function() {
+                    alert("m1");
+                },
+                method2:function() {
+                    alert("m2");
+                }
+            }
+        })
+    }
+
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <div @click="method1" class="box">
+            <!-- 이벤트 전달 -->
+            <button type="button" @click="method2">button</button>
+            <!-- 부모 이벤트는 타지 않음-->
+            <button type="button" @click.stop="method2">button</button>
+        </div>
+        
+        <!-- 클릭 이벤트를 무시한다.-->
+        <a @click.prevent href="http://www.google.co.kr">google</a>
+
+        <!-- 웹브라우저의 정의된 이벤트를 무시할 때 prevent를 사용한다. -->
+        <a @click.prevent="method1" href="http://www.google.co.kr">google</a>
+
+
+        <!-- 바깥 함수(자신)를 먼저 처리한다. -->
+        <div @click.capture="method1" class="box">
+            <button type="button" @click="method2">버튼</button>
+        </div>
+        
+        <!-- self 키워드는 자신한테 이벤트가 오더라도 무시한다. method2만 실행됨-->
+        <div @click.self="method1" class="box">
+            <button type="button" @click="method2">버튼</button>
+            <button type="button" @click="method2">버튼</button>
+        </div>
+
+        <!-- 한번만 동작하는 이벤트 -->
+        <div @click.once="method1" class="box">
+
+        </div>
+    </div>
+</body>
+</html>
