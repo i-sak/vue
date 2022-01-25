@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        /*
+        v-bind
+
+        Vue.js에서 HTML을 구성하는 요소에 값을 설정할 때 사용하는 지시자이다.
+        '속성, css, form' 등 다양한 요소들에 '값을 설정'할 수 있따.
+
+        --
+        1 속성 세팅
+        - HTML 태그의 속성을 세팅할 때는 v-bind : 속성명 을 사용한다.
+        - v-bind는 생략이 가능하다.
+        */
+       window.onload = function() {
+           var vml = new Vue({
+                el : '#test1',
+                data : {
+                    str1 : '문자열 입니다.',
+                    link : 'https://kr.vuejs.org',
+                    imageName : 'img/logo.png',
+                    imageWidth : '200'
+                },
+                methods : {
+                    setImageWidth : function() {
+                        this.imageWidth = '400'
+                    },
+                    resetImageWidth : function() {
+                        this.imageWidth = '200'
+                    }
+                }
+           }) 
+       }
+    </script>
+</head>
+<body>
+    <!-- v-bind는 뭔가 변화가 일어나고자 할 때 사용하곤 합니다. -->
+    <div id="test1">
+        <h3>{{str1}}</h3>
+        <a href="link">link1</a> X <br>
+        <a href="{{link}}">link2</a> X <br>
+        <a v-bind:href="link">link3</a> O <br>
+        <a :href="link">link4</a> O <br> <!-- 생략 가능 -->
+        <img src="img/logo.png" width="200"> <br>
+        <img :src="imageName" :width="imageWidth"
+        v-on:mouseenter="setImageWidth" v-on:mouseleave="resetImageWidth"><br>
+    </div>
+    <!-- v-bind를 사용하여 속성 값을 설정할 수 있다. -->
+    
+</body>
+</html>
