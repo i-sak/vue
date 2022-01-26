@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        // v-for
+        // HTML을 랜더링할 때 특정 태그 부분을 반복할 때 사용한다.
+
+        // 학습정리
+        // v-for를 사용하여 태그의 일정 부분을 반복할 수 있다.
+
+        window.onload = function(){
+            var vm1 = new Vue({
+                el : '#test1',
+                data : {
+                    arr : [10,20,30,40,50],
+                    input1 : '',
+                    arr2 : []
+                },
+                methods : {
+                    addArr2 : function() {
+                        this.arr2.push(this.input1)
+                        this.input1 = ''
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id='test1'>
+        <ul>
+            <li v-for="a1 in arr"> 
+                {{a1}}
+             </li>
+        </ul>
+        <hr>
+
+        <ul>
+            <li v-for="(a1, idx) in arr">
+                {{idx}} : {{a1}}
+            </li>
+        </ul>
+        <br>
+
+        <input type="text" v-model="input1">
+        <button type="button" @click="addArr2">add </button>
+        <ul>
+            <li v-for="a2 in arr2"> {{a2}}</li>
+        </ul>
+
+    </div>
+</body>
+</html>
