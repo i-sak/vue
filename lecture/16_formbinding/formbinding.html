@@ -84,10 +84,10 @@
         <h3>input9 : {{input9}} </h3>
         <hr>
 
-        <!--  -->
+        <!-- value를 찾아가기 때문에 data 에 value 명칭을 주어야 함. -->
         <h3>select</h3>
         <select v-model="input10"> 
-            <option value="item1">1</option>
+            <option value="item1">1</option>    
             <option value="item2">2</option>
             <option value="item3">3</option>
             <option value="item4">4</option>
@@ -96,15 +96,16 @@
         <h3>input10 : {{input10}} </h3>
         <hr>
 
+        <!-- model 바인딩 수식어는 vue 사이트에 공지되어 있다. -->
         <input type="text" v-model="input11">
         <h3>input11 : {{input11}}</h3>
-        <input type="text" v-model.lazy="input12">
+        <input type="text" v-model.lazy="input12">  <!-- 입력이 끝난 뒤에 입력되는 것 -->
         <h3>input12 : {{input12}}</h3>
         <br><br>
-        <input type="text" v-model.trim="input13">
+        <input type="text" v-model.trim="input13">  <!-- 양쪽의 공백을 지우는 것-->
         <h3>input13 : [{{input13}}]</h3>
         <br><br>
-        <input type="text" v-model.number="input14">
+        <input type="text" v-model.number="input14"> <!-- 숫자로만 입력되도록 처리하는 것. -->
         <h3>[{{input14}}]</h3>
         <button type="button" v-on:click='checkType'>typecheck</button>
     </div>
