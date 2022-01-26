@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <style>
+        /*
+        transition의 class 변화
+        
+        name 속성의 문자열 값 ex) v
+
+        v-enter > v-enter-active > v-enter-to
+        v-leave > v-leave-active > v-leave-to
+
+        enter나 enter-to 에
+        leave나 leave-to 에 공통적인 css가 적용이 되어야 한다면
+
+        active에 적용하면 된다.
+
+        */
+
+        /* 태그가 사라지는 동작이 발생할 때 공통 부분*/
+        .fade-leave-active {
+            transition : all .5s;
+        }
+        /* 태그가 사라지기 직전 */
+        .fade-leave {
+            transition: 1;
+        }
+        /* 태그가 사라지고 난 후 */
+        .fade-leave-to {
+            opacity: 0;
+        }
+        /* 태그가 나타나는 동작이 발생했을 때 공통 부분 */
+        .fade-enter-active {
+            transition : all .5s;
+        }
+        /* 태그가 나타나기 직전 */
+        .fade-enter {
+            opacity: 0;
+        }
+        /* 태그가 나타난 후 */
+        .fade-enter-to {
+            opacity: 1;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+    </style>
+
+    <script>
+        // transition
+        // HTML 태그에 대한 애니메이션을 구현할 때 css를 손쉽게 등록할 수 있는 기능을 지원한다.
+
+        // transition 태그를 이용해 손쉽게 애니메이션 css를 셋팅할 수 있다.
+        window.onload = function(){
+            var vm1 = new Vue({
+                el : '#test1',
+                data : {
+                    show1 : true,
+                    show2 : true,
+                    show3 : true,
+                    status : ''
+                },
+                methods : {
+                    setShow1 : function () {
+                        if(this.show1 == true) {
+                            this.show1 = false
+                        } else {
+                            this.show1 = true
+                        }
+                    },
+                    setShow2 : function () {
+                        if(this.show2 == true) {
+                            this.show2 = false
+                        } else {
+                            this.show2 = true
+                        }
+                    },
+                    setShow3 : function () {
+                        if(this.show3 == true) {
+                            this.show3 = false
+                        } else {
+                            this.show3 = true
+                        }
+                    },
+                    beforeEnter : function(){
+					    this.status = '나타나기 전'
+				    },
+                    enter : function() {
+                        this.status = "나타나는 중"
+                    },
+                    afterEnter : function(){
+                        this.status = '나타난 후'
+                    },
+                    enterCancelled : function(){
+                        this.status = '나타나는 과정 취소'
+                    },
+                    beforeLeave : function(){
+                        this.status = '사라지기 전'
+                    },
+                    leave : function(){
+                        this.status = '사라지는 중'
+                    },
+                    afterLeave : function(){
+                        this.status = '사라진 후'
+                    },
+                    leaveCancelled : function(){
+                        this.status = '사라지는 과정 취소'
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    
+    <div id="test1">
+        
+        <!-- name에 따른 css 클래스 이름이 정해진다. -->
+        <transition name="fade">    
+            <h3 v-if="show1">str</h3>
+        </transition>
+        <button type="button" @click="setShow1">show1</button>
+        <hr>
+
+        <!-- keyframe -->
+        <transition name="bounce">
+            <h1 v-if="show2">strstrstrstrstrstrstrstrstrstrstrstrstrstr</h1>
+        </transition>
+        <button type="button" @click="setShow2">show2</button>
+        <hr>
+
+        <!-- 애니메이션 과정에 이벤트를 준다. -->
+        <transition name="fade"
+            @before-enter="beforeEnter"
+            @enter='enter'
+            @after-enter='afterEnter'
+			@enter-cancelled='enterCancelled'
+			@before-leave='beforeLeave'
+			@leave='leave'
+			@after-leave='afterLeave'
+			@leave-cancelled='leaveCancelled'>
+            <h1 v-if="show3">str</h1>
+        </transition>
+        <button type="button" @click="setShow3">show3</button>
+        <h3>status : {{status}}</h3>
+    </div>
+    
+    
+    
+    
+    <img src="../img/transition.png" style="width: 80%;">
+
+</body>
+</html>
