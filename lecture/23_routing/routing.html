@@ -28,6 +28,8 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 
     <script>
+        // component로 등록하기 위한 변수 세팅
+        // tmeplate에 페이지 내용 등록
         var homeComponent = {
             template : "<h3>Home</h3>"
         }
@@ -45,7 +47,7 @@
                     component : homeComponent
                 },
                 {
-                    path : '/page1/:data1/:data2',
+                    path : '/page1/:data1/:data2',  // path에 있는 데이터 보내기
                     component : page1Component
                 },
                 {
