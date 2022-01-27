@@ -178,6 +178,8 @@
         <!-- v-show는 다 보여준 후 css style의 display 속성을 none 으로 처리 함 -->
         <!-- v-show는 template 태그를 지원하지 않는다. 
             else 에 대비하지 못한다. 
+            
+            그렇지만 다 보여주고 css 처리만 하는 것으로 더 적은 자원을 소모한다고 함 (강사 曰)
         -->
         <h3 v-show="a7 == 100">a7 is 100</h3>
         <h3 v-show="a7 != 100">a7 is not 100</h3>
