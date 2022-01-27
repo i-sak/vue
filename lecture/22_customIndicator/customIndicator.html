@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script>
+        // v- 로 시작 하는 지시자는 vue.js 에서 정의하여
+        // 제공하는 것도 있지만 개발자가 직접 만들어 사용하는 
+        // 것도 가능하다.
+
+        /*
+        ex) 
+
+        Vue.directive('focus', {
+            inserted : function(el){
+                el.focus()
+            }
+        })
+
+        */
+        
+        // 학습정리        
+        // vue.js는 개발자가 지시자를 직접 만들어 
+        // 사용하는 것을 지원한다.
+        Vue.directive('focus', {
+          inserted : function(el) {
+            el.focus()
+          }  
+        })
+
+        window.onload = function() {
+            var vml = new Vue({
+                el : '#test1',
+                data : {
+                    str : '',
+                    data1 : 'data1 value'
+                },
+                methods : {
+                    setStr : function() {
+                        this.str = '변경된 문자열'
+                    }
+                },
+                directives : {
+                    focus2 : {
+                        inserted : function(el) {
+                            el.focus()
+                        }
+                    },
+                    test : {
+                        // 지시자가 태그에 세팅되었을 때 딱 한번 호출
+                        bind : function(el) {
+                            console.log("bind")
+                        }
+                    }
+                }
+            })
+
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <input type="text" v-focus /><br>
+        <input type="text" v-focus2> <br>
+        <h3>{{str}}</h3>
+        <button type="button" @click="setStr">str change</button>
+
+        
+    </div>
+
+</body>
+</html>
