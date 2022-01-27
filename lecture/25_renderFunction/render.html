@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 랜더함수
+        // VueJS를 통해 HTML을 랜더링할 때 개발자가 
+        // 자유롭게 작업할 수 있도록 제공되는 개념이다. 자유로운 세팅 태그이름, 속성 등
+        
+        // Component를 만들 때 다양한 처리를 할 수 있다.
+
+        Vue.component('com1', {
+            template : '<h1>Hello World</h1>'
+        })
+        Vue.component('com2', {
+            template : '<h1><slot></slot></h1>' 
+            // slot 태그를 template 에서 사용하면
+            // component tag를 사용하는 곳의 text를 읽어와서 slot에 세팅한다.
+        })
+        Vue.component('com3', {
+
+            // # component에는 template이나, render 함수가 있어야 한다.
+            // template : '<h1><slot></slot></h1>' 
+            // render 함수를 쓰는 방법
+            render : function(createElement) { // 함수가 매개변수로 온다.
+                // createElement : tag객체를 만들 수 있는 함수
+
+                //var msg = "hello world"
+                var msg = this.$slots.default[0].text
+
+                // 속성들 읽어오기
+                var tagname = this.tagname
+                var idValue = this.id
+                var colorValue = this.color
+                var bgcolorValue = this.bgcolor
+                //alert(tagname)
+
+                var h1_tag = createElement(tagname, { // 'h1' 지우고 tagname 세팅
+                    attrs : {
+                        id : idValue // 'a1'
+                        // style : 'color:red; background-color:blue' // 방법 1
+                    },
+                    // 방법 2
+                    style : {
+                            color : colorValue, // 'red',
+                            backgroundColor : bgcolorValue// 'blue'   
+                    }
+                }, msg)
+
+                return h1_tag
+                
+            },
+            props : {
+                tagname : {
+                    // 이넘의 값의 타입은 문자열이야 라고 등록한다.
+                    attributes : String,
+                    required : true
+                },
+                id : {
+                    attributes : String,
+                    required : true
+                },
+                color : {
+                    attributes : String
+                },
+                bgcolor : {
+                    attributes : String
+                }
+
+
+            }
+        })
+        window.onload = function() {
+            var vm1 = new Vue({
+                el : '#test1'
+            }) 
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <com1>aaa</com1>   <!-- 등록된 component를 랜더링 한다. -->
+        <com1>bbb</com1>
+        <com1>ccc</com1>
+        <hr>
+        <com2>aaa</com2>
+        <com2>bbb</com2>
+        <com2>ccc</com2>
+        <hr>
+        <!-- 소문자 setting -->
+        <com3 :tagname="'h1'" :id="'a1'" :color="'red'" :bgcolor="'blue'">apple</com3>
+        <com3 :tagname="'h2'" :id="'a2'" :color="'white'" :bgcolor="'black'">google</com3>
+        <com3 :tagname="'h3'" :id="'a3'">Microsoft</com3>
+    </div>
+
+
+
+    <!-- 학습정리
+    
+    랜더 함수를 이용하면 랜더링시 다양한 처리를 할 수 있다.
+
+    -->
+</body>
+</html>
