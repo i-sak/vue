@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script>
+    // Data 속성
+    // Data 속성에 셋팅되어 있는 변수는 웹브라우저에 의해 감시된다.
+    // 이 변수의 경우 값이 변경되면 웹브라우저가 반응하여 바로 화면에 반영하게 된다.
+    // 만약 Vue 객체 생성 후 외부에서 추가된 변수가 있다면 이 변수는 웹브라우저가 감시하지 않는다.
+    // 이 때문에 다음 랜더링시 화면에 반영되게 된다.
+    // 만약 추가되는 변수를 브라우저가 감시하도록 하고자 한다면 Vue.set 으로 등록해주면 된다.
+
+    // 반응형 인터페이스 
+    // 값 셋팅에 반응하는 변수의 경우 watch를 이용해 
+    // 변수의 값이 변경되는 것을 감지할 수 있다.
+
+        window.onload = function() {
+            var vm1 = new Vue({
+                el : '#test1',
+                data : {
+                    value1 : 100,
+                    obj1 : {},
+                    counter : 0,
+                    newValue : 0,
+                    oldValue : 0
+                },
+                methods : {
+                    setValue1 : function() {
+                        this.value1 = 200
+                    },
+                    setValue2 : function() {
+                        this.obj1.value2 = 2000
+                    },
+                    addcounter : function() {
+                        this.counter++
+                    }
+                }
+            })
+            // Vue 객체 생성 후 외부에서 추가된 변수가 있다면
+            // 이 변수는 웹브라우저가 감시하지 않는다.
+            
+            // vm1.value2 = 1000
+
+            // 만약 추가되는 변수를 브라우저가 감시하도록 
+            // 하고자 한다면 Vue.set 으로 등록해주면 된다.
+            Vue.set(vm1.obj1, "value2", 1000)
+
+
+            // counter 변수의 값이 바뀌게 되면
+            // 다음 함수가 자동으로 호출이 된다.
+            // counter 변수에 새롭게 세팅된 값이 new_value에 들어가고
+            // 그걸로 작업을 한다.
+            vm1.$watch("counter", function(new_value, old_Value ) {
+                this.newValue = new_value
+                this.oldValue = old_Value
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <h3>value : {{value1}}</h3>
+        <button type="button" @click="setValue1">value1</button>
+        <hr>
+
+        <!-- 외부에서 세팅한 변수는 감지하지 않는다. -->
+        <h3>value2 : {{obj1.value2}}</h3>
+        <button type="button" @click="setValue2">value2</button>
+        <hr>
+
+        <!-- 감시대상 -->
+        <h3>counter : {{counter}}</h3>
+        <h3>new value : {{newValue}}</h3>
+        <h3>old Value : {{oldValue}}</h3>
+        <button type="button" @click="addcounter">add Counter</button>
+    </div>
+
+    <!--
+
+    Watch를 이용하면 변수 값의 변화를 감지하여 필요한 처리를 할 수 있다.
+
+    -->
+</body>
+</html>
