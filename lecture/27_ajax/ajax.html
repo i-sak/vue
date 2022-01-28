@@ -11,16 +11,17 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
     <!-- ajax library -->
+    <!-- 비동기 통신 라이브러리 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
         // Vue.js의 ajax
         // VueJS에서 Ajax 통신을 하기 위해서는 라이브러리를 이용해야한다.
         // 다양한 라이브러리가 있지만 가장 많이 사용하는 axios 라이브러리를 사용한다.
+        // 구현하기가 굉장히 쉽기 때문에 이 라이브러리를 많이 사용한다.
 
         // 학습정리
         // Axios 라이브러를 이용하면 손쉽게 ajax 통신이 가능하다.
-
         window.onload = function() {
             var vm1 = new Vue({
                 el : '#test1',
@@ -30,7 +31,11 @@
                 },
                 methods : {
                     getData : function() {
+                        // then 응답 > 함수 (응답결과 : response)
                         axios.get('data.json').then(function(response) {
+                            // this는 axios 자신을 얘기하기 때문에 this를 쓰지 않고 vm1을 호출
+                            // response 안 data 안에 JSON 데이터 객체형태를 받아 온다.
+                            // JSON 형식 다 분석 > 객체 > data 로 담아 온다.
                             vm1.data1 =  response.data.data1
                             vm1.data2 =  response.data.data2
                         })
