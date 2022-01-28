@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- vue cdn-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <!-- ajax library -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        // Vue.js의 ajax
+        // VueJS에서 Ajax 통신을 하기 위해서는 라이브러리를 이용해야한다.
+        // 다양한 라이브러리가 있지만 가장 많이 사용하는 axios 라이브러리를 사용한다.
+
+        // 학습정리
+        // Axios 라이브러를 이용하면 손쉽게 ajax 통신이 가능하다.
+
+        window.onload = function() {
+            var vm1 = new Vue({
+                el : '#test1',
+                data : {
+                    data1 : '',
+                    data2 : ''
+                },
+                methods : {
+                    getData : function() {
+                        axios.get('data.json').then(function(response) {
+                            vm1.data1 =  response.data.data1
+                            vm1.data2 =  response.data.data2
+                        })
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <h3>data1 : {{data1}}</h3>
+        <h3>data2 : {{data2}} </h3>
+        <button type="button" @click="getData">데이터 가져오기</button>
+    </div>
+</body>
+</html>
