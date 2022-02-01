@@ -1,6 +1,8 @@
 // jQuery => $(function() {
 // 
 // })
+
+// 페이지가 로딩되면 자동으로 호출되는 함수
 window.onload = function() {
     var app = new Vue({
         el : '#app',
