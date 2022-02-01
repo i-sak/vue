@@ -1,0 +1,11 @@
+/* 전체 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* header, bottom */
+nav.navbar, div.bottom  {
+    background-color: black;
+    color:white;
+}
