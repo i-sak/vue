@@ -9,3 +9,8 @@ nav.navbar, div.bottom  {
     background-color: black;
     color:white;
 }
+
+ul.pageNumberList li {
+    display: inline-block;
+    margin: 0 5px;
+}
