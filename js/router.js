@@ -19,7 +19,7 @@ var router = new VueRouter({
             component : httpVueLoader("../components/user/join.vue")
         },
         {
-            path:'/modify_user',
+            path : '/modify_user',
             component : httpVueLoader("../components/user/modify_user.vue")
         },
         {
@@ -41,6 +41,14 @@ var router = new VueRouter({
         {
             path:'/board_write',
             component : httpVueLoader("../components/board/board_write.vue")
+        },
+        {
+             // 이곳에서 비동기 처리 후 페이지 이동
+             path : '/logout',
+             beforeEnter(to, from, next) {
+                 alert("로그아웃되었습니다.")
+                 next("/")  // 첫페이지로 이동
+             }
         }
 
     ],

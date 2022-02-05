@@ -8,6 +8,6 @@
     <router-link to="/login">login</router-link>
     <router-link to="/join">join</router-link>
     <router-link to="/modify_user">modify_user</router-link>
-    <router-link to="/">logout</router-link>
+    <router-link to="/logout">logout</router-link>
 </nav>
 </template>
