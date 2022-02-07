@@ -1,5 +1,5 @@
 // router 기본 세팅
-
+// components
 var router = new VueRouter({
     routes : [
         {
